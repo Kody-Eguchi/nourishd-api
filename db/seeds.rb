@@ -9,7 +9,7 @@
 puts "Seeding Data ..."
 
 User.destroy_all
-User.create!({
+user1 = User.create!({
   username: 'KojiE',
   email:  'k@e.com',
   password: '123',
@@ -17,13 +17,17 @@ User.create!({
   height: 175,
   age: 30,
 })
-User.create!({
+user2 = User.create!({
   username: 'HarshP',
   email:  'h@p.com',
   password: '123',
   weight: 65,
   height: 170,
   age: 23,
+})
+
+user1.favourites.create!({
+  recipes: ['Chicken Vesuvio', 'Chicken Paprikash']
 })
 
 
