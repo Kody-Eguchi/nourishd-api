@@ -30,5 +30,8 @@ user1.favourites.create!({
   recipes: ['Chicken Vesuvio', 'Chicken Paprikash']
 })
 
+user1.days.create!
+user2.days.create!
+
 
 puts "🌱 Seeding Completed! 🌱"
