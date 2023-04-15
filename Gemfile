@@ -42,3 +42,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Net::HTTP
 gem 'net-http'
+# rack-cors
+gem 'rack-cors'
