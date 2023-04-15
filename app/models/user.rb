@@ -1,7 +1,8 @@
 class User < ApplicationRecord
+  has_secure_password
   has_many :favourites
   has_many :days
-
+  
 
 
   def authenticate_with_credentials(email, password)
@@ -13,5 +14,5 @@ class User < ApplicationRecord
       nil
     end
   end
-  
+
 end
