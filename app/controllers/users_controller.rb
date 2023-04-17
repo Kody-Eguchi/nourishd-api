@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 
   def getUserById
     user_id = decrypt_cookie_value(:_nutrition_app_api_session)
-    @user = User.find(user_id)
+    @user = User.find_by(user_id)
     render json: {user: @user}
   end
 
