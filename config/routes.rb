@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#destroy'
   get '/status' => 'session#userLoggedIn?'
 
-  get '/userInfo' => 'users/#getUserById'
+  get '/userInfo' => 'users#getUserById'
 end
