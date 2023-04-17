@@ -14,7 +14,15 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    # session[:user_id] = nil
+    # reset_session
+    cookies.delete(:_nutrition_app_api_session)
   end
+
+
+    # def current_user
+    #   render json: { logged_in: !!current_user, user: current_user }
+    # end
+
 
 end
