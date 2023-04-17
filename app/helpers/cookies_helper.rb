@@ -7,6 +7,7 @@ module CookiesHelper
     decrypted_value = encrypted_value
     puts '🌱'
     puts encrypted_value
+    puts encrypted_value.fetch(:user_id)
     puts '🌱'
     decrypted_value
   end
