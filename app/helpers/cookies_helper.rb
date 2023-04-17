@@ -1,3 +1,4 @@
+require 'action_controller/cookies'
 module CookiesHelper
   def decrypt_cookie_value(name)
     encrypted_value = cookies.encrypted[name]
