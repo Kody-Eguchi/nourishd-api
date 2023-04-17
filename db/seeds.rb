@@ -16,6 +16,7 @@ user1 = User.create!({
   weight: 70,
   height: 175,
   age: 30,
+  sex: "male"
 })
 user2 = User.create!({
   username: 'HarshP',
@@ -24,6 +25,7 @@ user2 = User.create!({
   weight: 65,
   height: 170,
   age: 23,
+  sex: "male"
 })
 
 user1.favourites.create!({
