@@ -1,4 +1,5 @@
 require "active_support/core_ext/integer/time"
+require 'dotenv'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -67,7 +68,7 @@ Rails.application.configure do
 
   config.middleware.insert_before 0, Rack::Cors do
     allow do
-      origins 'http://localhost:3002/' # Frontend origin
+      origins `http://localhost:#{ENV['PORT']}/` # Frontend origin
       resource '*',
         headers: :any,
         methods: [:get, :post, :put, :patch, :delete, :options, :head],
