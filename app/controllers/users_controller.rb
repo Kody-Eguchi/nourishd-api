@@ -62,7 +62,8 @@ class UsersController < ApplicationController
         :password,
         :weight,
         :height,
-        :age
+        :age,
+        :sex
       )
     end
 end
