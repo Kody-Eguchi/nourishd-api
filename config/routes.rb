@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   get '/login' => 'sessions#index'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
+  get '/status' => 'session#userLoggedIn?'
 end

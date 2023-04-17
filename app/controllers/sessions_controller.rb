@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+  include ActionController::Cookies
+
+
   def index
   end
 
@@ -17,12 +20,15 @@ class SessionsController < ApplicationController
     # session[:user_id] = nil
     # reset_session
     cookies.delete(:_nutrition_app_api_session)
+    render json: {success: true, message: 'Logout Success'}
   end
 
 
-    # def current_user
-    #   render json: { logged_in: !!current_user, user: current_user }
-    # end
+  def userLoggedIn?
+    user_cookie = cookies[:_nutrition_app_api_session]
+
+    render json: {user_cookie: user_cookie}
+  end
 
 
 end
