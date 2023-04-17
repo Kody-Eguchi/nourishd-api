@@ -20,10 +20,11 @@ class UsersController < ApplicationController
 
     if @user.save
       signin(@user)
-      render json: @user, status: :created, location: @user
+      render json: { user: @user, success: true }, status: :created
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: { errors: @user.errors.full_messages, success: false }, status: :unprocessable_entity
     end
+    
   end
 
   # PATCH/PUT /users/1
