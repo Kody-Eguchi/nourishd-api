@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
+  include CookiesHelper
 
   # GET /users
   def index
@@ -10,7 +11,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: @user
+    render json: {user: @user}
   end
 
   # POST /users
@@ -39,6 +40,13 @@ class UsersController < ApplicationController
   # DELETE /users/1
   def destroy
     @user.destroy
+  end
+
+
+  def getUserById
+    user_id = decrypt_cookie_value(:_nutrition_app_api_session)
+    @user = User.find(user_id)
+    render json: {user: @user}
   end
 
   private
