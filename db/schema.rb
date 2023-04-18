@@ -10,26 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_18_162219) do
+ActiveRecord::Schema.define(version: 2023_04_18_191335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "days", force: :cascade do |t|
     t.bigint "user_id"
-    t.integer "calories", default: 0
-    t.integer "fat", default: 0
-    t.integer "carbohydrates", default: 0
-    t.integer "sodium", default: 0
-    t.integer "sugar", default: 0
-    t.integer "protein", default: 0
-    t.integer "fiber", default: 0
+    t.decimal "calories", precision: 10, scale: 5, default: "0.0"
+    t.decimal "fat", precision: 10, scale: 5, default: "0.0"
+    t.decimal "carbohydrates", precision: 10, scale: 6, default: "0.0"
+    t.decimal "sodium", precision: 10, scale: 6, default: "0.0"
+    t.decimal "sugar", precision: 10, scale: 6, default: "0.0"
+    t.decimal "protein", precision: 10, scale: 6, default: "0.0"
+    t.decimal "fiber", precision: 10, scale: 6, default: "0.0"
     t.decimal "potassium", precision: 10, scale: 5, default: "0.0"
     t.decimal "vitamin_a", precision: 10, scale: 5, default: "0.0"
     t.decimal "vitamin_c", precision: 10, scale: 6, default: "0.0"
-    t.decimal "calcium", precision: 10, scale: 1, default: "0.0"
-    t.decimal "iron", precision: 10, scale: 3, default: "0.0"
-    t.decimal "cholesterol", precision: 10, scale: 1, default: "0.0"
+    t.decimal "calcium", precision: 10, scale: 5, default: "0.0"
+    t.decimal "iron", precision: 10, scale: 5, default: "0.0"
+    t.decimal "cholesterol", precision: 10, scale: 5, default: "0.0"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_days_on_user_id"
