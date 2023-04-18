@@ -50,7 +50,7 @@ class DaysController < ApplicationController
           .first
     # @day.update(day_params)
     if @day.update(day_params)
-      render json: @day
+      render json: { day: @day, success: true }
     else
       render json: @day.errors, status: :unprocessable_entity
     end
@@ -62,7 +62,7 @@ class DaysController < ApplicationController
           .where("DATE(created_at) = ?", Date.today)
           .first
     puts @day
-    render json: {day: @day}
+    render json: { day: @day, success: true }
   end
 
 
