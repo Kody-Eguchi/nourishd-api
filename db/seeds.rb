@@ -28,12 +28,38 @@ user2 = User.create!({
   sex: "male"
 })
 
+user3 = User.create!({
+  username: 'MariaS',
+  email:  'm@s.com',
+  password: '123',
+  weight: 65,
+  height: 170,
+  age: 23,
+  sex: "female"
+})
+
 user1.favourites.create!({
   recipes: ['Chicken Vesuvio', 'Chicken Paprikash']
 })
 
 user1.days.create!
 user2.days.create!
+user3.days.create!({
+  calories: 200,
+  fat: 20,
+  carbohydrates: 3,
+  sodium: 1,
+  sugar: 4,
+  protein: 5,
+  fiber: 13,
+  potassium: 0.0001,
+  vitamin_a: 0.00001,
+  vitamin_c: 0.000045,
+  calcium: 0.5,
+  iron: 0.010,
+  cholesterol: 0.2,
+
+})
 
 
 puts "🌱 Seeding Completed! 🌱"
