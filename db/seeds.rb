@@ -43,7 +43,7 @@ user1.favourites.create!({
 })
 
 user1.days.create!
-user2.days.create!
+# user2.days.create!
 user3.days.create!({
   calories: 200,
   fat: 20,
