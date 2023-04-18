@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_18_155015) do
+ActiveRecord::Schema.define(version: 2023_04_18_162219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,12 +24,12 @@ ActiveRecord::Schema.define(version: 2023_04_18_155015) do
     t.integer "sugar", default: 0
     t.integer "protein", default: 0
     t.integer "fiber", default: 0
-    t.integer "potassium", default: 0
-    t.integer "vitamin_a", default: 0
-    t.integer "vitamin_c", default: 0
-    t.integer "calcium", default: 0
-    t.integer "iron", default: 0
-    t.integer "cholesterol", default: 0
+    t.decimal "potassium", precision: 10, scale: 5, default: "0.0"
+    t.decimal "vitamin_a", precision: 10, scale: 5, default: "0.0"
+    t.decimal "vitamin_c", precision: 10, scale: 6, default: "0.0"
+    t.decimal "calcium", precision: 10, scale: 1, default: "0.0"
+    t.decimal "iron", precision: 10, scale: 3, default: "0.0"
+    t.decimal "cholesterol", precision: 10, scale: 1, default: "0.0"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_days_on_user_id"
