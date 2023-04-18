@@ -80,7 +80,7 @@ class DaysController < ApplicationController
       puts key
       puts '🔑'
       puts value
-      @day[key] += value.to_i
+      @day[key] += value.to_f
     end
     
     if @day.save
