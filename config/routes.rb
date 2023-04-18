@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   get '/status' => 'session#userLoggedIn?'
 
   get '/userInfo' => 'users#getUserById'
+  get '/dayInfo' => 'days#getDayById'
 end
