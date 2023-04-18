@@ -43,6 +43,18 @@ class DaysController < ApplicationController
     @day.destroy
   end
 
+  def updateDayInfo
+    user_id = decrypt_cookie_value(:_nutrition_app_api_session)
+    @day = Day.where(user_id: user_id)
+          .where("DATE(created_at) = ?", Date.today)
+          .first
+    # @day.update(day_params)
+    if @day.update(day_params)
+      render json: @day
+    else
+      render json: @day.errors, status: :unprocessable_entity
+    end
+  end
 
   def getDayById
     user_id = decrypt_cookie_value(:_nutrition_app_api_session)
