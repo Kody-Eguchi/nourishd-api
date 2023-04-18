@@ -54,7 +54,7 @@ user3.days.create!({
   fiber: 13,
   potassium: 0.0001,
   vitamin_a: 0.00001,
-  vitamin_c: 0.000045,
+  vitamin_c: 0.045,
   calcium: 0.5,
   iron: 0.010,
   cholesterol: 0.2,
