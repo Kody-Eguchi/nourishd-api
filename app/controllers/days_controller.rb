@@ -43,38 +43,52 @@ class DaysController < ApplicationController
     @day.destroy
   end
 
+  # def updateDayInfo
+  #   user_id = decrypt_cookie_value(:_nutrition_app_api_session)
+  #   # Find the existing record for the current day or initialize a new one
+  #   @day = Day.find_or_initialize_by(user_id: user_id, created_at: Date.today)
+   
+  #   # Iterate over day_params and add the new values to the existing ones
+  #   day_params.each do |key, value|
+  #     # Assuming all columns in Day are integers, we can safely add them
+  #     # If there are non-integer columns, you may need to add a conditional check here
+  #     puts key
+  #     puts '🔑'
+  #     puts value
+  #     @day[key] += value.to_f
+  #   end
+  
+  #   # Save the updated record
+  #   if @day.save
+  #     render json: { day: @day, success: true }
+  #   else
+  #     render json: @day.errors, status: :unprocessable_entity
+  #   end
+  # end  
+  
   def updateDayInfo
     user_id = decrypt_cookie_value(:_nutrition_app_api_session)
-    # Find the existing record for the current day or initialize a new one
-    @day = Day.find_or_initialize_by(user_id: user_id, created_at: Date.today)
-  
-    # Iterate over day_params and add the new values to the existing ones
+    @day = Day.where(user_id: user_id)
+          .where("DATE(created_at) = ?", Date.today)
+          .first
+
+    if @day == nil
+      @day = Day.create!(user_id: user_id)
+    end
+
     day_params.each do |key, value|
-      # Assuming all columns in Day are integers, we can safely add them
-      # If there are non-integer columns, you may need to add a conditional check here
+      puts key
+      puts '🔑'
+      puts value
       @day[key] += value.to_i
     end
-  
-    # Save the updated record
+    
     if @day.save
       render json: { day: @day, success: true }
     else
       render json: @day.errors, status: :unprocessable_entity
     end
-  end  
-  
-  # def updateDayInfo
-  #   user_id = decrypt_cookie_value(:_nutrition_app_api_session)
-  #   @day = Day.where(user_id: user_id)
-  #         .where("DATE(created_at) = ?", Date.today)
-  #         .first
-  #   # @day.update(day_params)
-  #   if @day.update(day_params)
-  #     render json: { day: @day, success: true }
-  #   else
-  #     render json: @day.errors, status: :unprocessable_entity
-  #   end
-  # end
+  end
 
   def getDayById
     user_id = decrypt_cookie_value(:_nutrition_app_api_session)
