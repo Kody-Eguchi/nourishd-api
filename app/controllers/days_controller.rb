@@ -67,7 +67,7 @@ class DaysController < ApplicationController
         :user_id,
         :calories,
         :fat,
-        :carbohydrate,
+        :carbohydrates,
         :sodium,
         :sugar,
         :protein,

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_17_165421) do
+ActiveRecord::Schema.define(version: 2023_04_18_155015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2023_04_17_165421) do
     t.bigint "user_id"
     t.integer "calories", default: 0
     t.integer "fat", default: 0
-    t.integer "carbohydrate", default: 0
+    t.integer "carbohydrates", default: 0
     t.integer "sodium", default: 0
     t.integer "sugar", default: 0
     t.integer "protein", default: 0
