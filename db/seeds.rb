@@ -52,7 +52,7 @@ user3.days.create!({
   sugar: 4,
   protein: 5,
   fiber: 13,
-  potassium: 0.0001,
+  potassium: 1.4,
   vitamin_a: 0.00001,
   vitamin_c: 0.045,
   calcium: 0.5,
