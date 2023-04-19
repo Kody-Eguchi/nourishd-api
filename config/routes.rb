@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   get '/userInfo' => 'users#getUserById'
   get '/dayInfo' => 'days#getDayById'
   post '/updateDayInfo' => 'days#updateDayInfo'
+  get '/recipeSearch' => 'recipes#getRecipeById'
 end
