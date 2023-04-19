@@ -42,7 +42,7 @@ class DaysController < ApplicationController
   def destroy
     @day.destroy
   end
-
+  # Update Day Row Contents
   def updateDayInfo
     user_id = decrypt_cookie_value(:_nutrition_app_api_session)
     @day = Day.where(user_id: user_id)
@@ -57,12 +57,35 @@ class DaysController < ApplicationController
       puts key
       puts '🔑'
       puts value
-      if key == 'history'
-        @day.history << value
+
+      # --------------------------
+      if value < 0
+        #key is negative value remove key from history array and subtract nutrient intakes
+        if key == 'history'
+          @day.update_all("history = array_remove(history, '#{value}')")
+        else
+          @day[key] += value.to_f
+        end
       else
-        @day[key] += value.to_f
+        #key is negative value add key from history array and increment nutrient intakes
+        if key == 'history'
+          @day.history << value
+        else
+          @day[key] += value.to_f
+        end
       end
-   
+
+      # --------------------------
+
+
+      # if key == 'history'
+      #   @day.history << value
+      # else
+      #   @day[key] += value.to_f
+      # end
+
+
+
     end
     
     if @day.save
@@ -70,8 +93,10 @@ class DaysController < ApplicationController
     else
       render json: @day.errors, status: :unprocessable_entity
     end
+
   end
 
+# Get Day Row By User Id
   def getDayById
     user_id = decrypt_cookie_value(:_nutrition_app_api_session)
     @day = Day.where(user_id: user_id)
