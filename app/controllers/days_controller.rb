@@ -84,6 +84,9 @@ class DaysController < ApplicationController
         @day.save # Save the changes to the database
       else
         @day[key] += value.to_f
+        if @day[key] < 0
+          @day[key] = 0
+        end
         @day.save # Save the changes to the database
       end
 
