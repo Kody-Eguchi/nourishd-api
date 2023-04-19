@@ -59,7 +59,7 @@ class DaysController < ApplicationController
       puts value
 
       # --------------------------
-      if value < 0
+      if value < 0 
         #key is negative value remove key from history array and subtract nutrient intakes
         if key == 'history'
           @day.update_all("history = array_remove(history, '#{value}')")
