@@ -26,8 +26,8 @@ class SessionsController < ApplicationController
 
   def userLoggedIn?
     user_cookie = cookies[:_nutrition_app_api_session]
-
-    render json: {user_cookie: user_cookie}
+    @user = User.find_by_id(user_cookie)
+    render json: {user: @user , success: true}
   end
 
 
