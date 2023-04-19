@@ -75,14 +75,16 @@ class DaysController < ApplicationController
       #   end
       # end
 
-      if key == 'history' do
-        if @day.history.include?(value) do
-          @day.update_all("history = array_remove(history, '#{value}')")
+      if key == 'history'
+        if @day.history.include?(value)
+          @day.history.delete(value)
         else
           @day.history << value
         end
+        @day.save # Save the changes to the database
       else
         @day[key] += value.to_f
+        @day.save # Save the changes to the database
       end
 
       # --------------------------
