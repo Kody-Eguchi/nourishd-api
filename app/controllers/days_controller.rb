@@ -59,20 +59,30 @@ class DaysController < ApplicationController
       puts value
 
       # --------------------------
-      if value < 0 
-        #key is negative value remove key from history array and subtract nutrient intakes
-        if key == 'history'
+      # if value < 0 
+      #   #key is negative value remove key from history array and subtract nutrient intakes
+      #   if key == 'history'
+      #     @day.update_all("history = array_remove(history, '#{value}')")
+      #   else
+      #     @day[key] += value.to_f
+      #   end
+      # else
+      #   #key is negative value add key from history array and increment nutrient intakes
+      #   if key == 'history'
+      #     @day.history << value
+      #   else
+      #     @day[key] += value.to_f
+      #   end
+      # end
+
+      if key == 'history' do
+        if @day.history.include?(value) do
           @day.update_all("history = array_remove(history, '#{value}')")
         else
-          @day[key] += value.to_f
+          @day.history << value
         end
       else
-        #key is negative value add key from history array and increment nutrient intakes
-        if key == 'history'
-          @day.history << value
-        else
-          @day[key] += value.to_f
-        end
+        @day[key] += value.to_f
       end
 
       # --------------------------
