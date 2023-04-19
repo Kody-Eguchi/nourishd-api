@@ -58,7 +58,7 @@ class DaysController < ApplicationController
       puts '🔑'
       puts value
       if key == 'history'
-        puts 'if statement works' 
+        @day.history << value
       else
         @day[key] += value.to_f
       end
@@ -106,7 +106,26 @@ class DaysController < ApplicationController
         :calcium,
         :iron,
         :cholesterol,
-        :history
+        history:  {}
       )
+      # permitted_params = params.require(:day).permit(
+      #   :user_id,
+      #   :calories,
+      #   :fat,
+      #   :carbohydrates,
+      #   :sodium,
+      #   :sugar,
+      #   :protein,
+      #   :fiber,
+      #   :potassium,
+      #   :vitamin_a,
+      #   :vitamin_c,
+      #   :calcium,
+      #   :iron,
+      #   :cholesterol,
+      #   :history
+      # )
+      # permitted_params[:history] = params.require(:day)[:history].permit!
+      # permitted_params
     end
 end
