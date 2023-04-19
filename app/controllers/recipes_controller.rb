@@ -26,7 +26,7 @@ class RecipesController < ApplicationController
         end
       end
     end
-    render json: response , {success: true }
+    render json: {response: response, success: true }
   end
 
 
