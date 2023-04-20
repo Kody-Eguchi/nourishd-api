@@ -42,6 +42,15 @@ class FavouritesController < ApplicationController
     @favourite.destroy
   end
 
+  def getFavouritesByUserId
+
+    user_id = decrypt_cookie_value(:_nutrition_app_api_session)
+    @recipes = Favourite.where(user_id: user_id)
+
+    render json: { recipe: @recipes, success: true }
+    
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_favourite
