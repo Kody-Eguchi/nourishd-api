@@ -42,6 +42,8 @@ class DaysController < ApplicationController
   def destroy
     @day.destroy
   end
+
+
   # Update Day Row Contents
   def updateDayInfo
     user_id = decrypt_cookie_value(:_nutrition_app_api_session)
@@ -54,52 +56,12 @@ class DaysController < ApplicationController
     end
 
     day_params.each do |key, value|
-      puts key
-      puts '🔑'
-      puts value
-
-      # --------------------------
-      # if value < 0 
-      #   #key is negative value remove key from history array and subtract nutrient intakes
-      #   if key == 'history'
-      #     @day.update_all("history = array_remove(history, '#{value}')")
-      #   else
-      #     @day[key] += value.to_f
-      #   end
-      # else
-      #   #key is negative value add key from history array and increment nutrient intakes
-      #   if key == 'history'
-      #     @day.history << value
-      #   else
-      #     @day[key] += value.to_f
-      #   end
-      # end
-
+      
       if key == 'history'
-        if @day.history.include?(value)
-          @day.history.delete(value)
-        else
-          @day.history << value
-        end
-        @day.save # Save the changes to the database
+        @day.history << value
       else
         @day[key] += value.to_f
-        if @day[key] < 0
-          @day[key] = 0
-        end
-        @day.save # Save the changes to the database
       end
-
-      # --------------------------
-
-
-      # if key == 'history'
-      #   @day.history << value
-      # else
-      #   @day[key] += value.to_f
-      # end
-
-
 
     end
     
@@ -110,6 +72,36 @@ class DaysController < ApplicationController
     end
 
   end
+
+# Remove items from history array and subtract nutrient from each column
+def removeItem
+  user_id = decrypt_cookie_value(:_nutrition_app_api_session)
+  @day = Day.where(user_id: user_id)
+        .where("DATE(created_at) = ?", Date.today)
+        .first
+
+  day_params.each do |key, value|
+    if key == 'history'
+      index = @day.history.index(value)
+      @day.history.delete_at(index) if index
+    else
+      @day[key] += value.to_f
+      if @day[key] < 0
+        @day[key] = 0
+      end
+    end
+  end
+
+  if @day.save
+    render json: { day: @day, success: true }
+  else
+    render json: @day.errors, status: :unprocessable_entity
+  end
+  
+end
+
+
+
 
 # Get Day Row By User Id
   def getDayById
@@ -148,24 +140,6 @@ class DaysController < ApplicationController
         :cholesterol,
         history:  {}
       )
-      # permitted_params = params.require(:day).permit(
-      #   :user_id,
-      #   :calories,
-      #   :fat,
-      #   :carbohydrates,
-      #   :sodium,
-      #   :sugar,
-      #   :protein,
-      #   :fiber,
-      #   :potassium,
-      #   :vitamin_a,
-      #   :vitamin_c,
-      #   :calcium,
-      #   :iron,
-      #   :cholesterol,
-      #   :history
-      # )
-      # permitted_params[:history] = params.require(:day)[:history].permit!
-      # permitted_params
+      
     end
 end
