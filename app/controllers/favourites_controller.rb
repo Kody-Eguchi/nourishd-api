@@ -51,7 +51,8 @@ class FavouritesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def favourite_params
       params.require(:user).permit(
-        :recipe_id,
+        :user_id,
+        recipe_id: {},
         :name,
         :image,
         :url,
