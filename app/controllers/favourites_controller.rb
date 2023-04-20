@@ -52,7 +52,7 @@ class FavouritesController < ApplicationController
     def favourite_params
       params.require(:favourite).permit(
         :user_id,
-        recipe_id: {},
+        :recipe_id,
         :name,
         :image,
         :url,
