@@ -19,7 +19,7 @@ class FavouritesController < ApplicationController
 
     user_id = decrypt_cookie_value(:_nutrition_app_api_session)
     params[:user_id] = user_id
-    @favourite = Favourite.new(favourite_params)
+    @favourite = Favourite.new(favourite_params.merge(user_id: user_id))
 
     if @favourite.save
       render json: @favourite, status: :created, location: @favourite
