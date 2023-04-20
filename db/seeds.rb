@@ -38,9 +38,8 @@ user3 = User.create!({
   sex: "female"
 })
 
-user1.favourites.create!({
-  recipes: ['Chicken Vesuvio', 'Chicken Paprikash']
-})
+# user1.favourites.create!({
+# })
 
 user1.days.create!
 # user2.days.create!

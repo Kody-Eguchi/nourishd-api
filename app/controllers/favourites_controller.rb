@@ -1,5 +1,6 @@
 class FavouritesController < ApplicationController
   before_action :set_favourite, only: [:show, :update, :destroy]
+  include CookiesHelper
 
   # GET /favourites
   def index
@@ -15,6 +16,9 @@ class FavouritesController < ApplicationController
 
   # POST /favourites
   def create
+
+    user_id = decrypt_cookie_value(:_nutrition_app_api_session)
+    params[:user_id] = user_id
     @favourite = Favourite.new(favourite_params)
 
     if @favourite.save
@@ -46,6 +50,14 @@ class FavouritesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def favourite_params
-      params.fetch(:favourite, {})
+      params.require(:user).permit(
+        :recipe_id,
+        :name,
+        :image,
+        :url,
+        :diet_labels,
+        :health_labels,
+        :ingredient_lines
+      )
     end
 end
