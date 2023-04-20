@@ -56,9 +56,9 @@ class FavouritesController < ApplicationController
         :name,
         :image,
         :url,
-        :diet_labels,
-        :health_labels,
-        :ingredient_lines
+        :diet_labels => [],
+        :health_labels => [],
+        :ingredient_lines => []
       )
     end
 end
