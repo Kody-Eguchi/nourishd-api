@@ -39,7 +39,13 @@ class FavouritesController < ApplicationController
 
   # DELETE /favourites/1
   def destroy
-    @favourite.destroy
+    user_id = decrypt_cookie_value(:_nutrition_app_api_session)
+    @favourite = Favourite.find_by(user_id: user_id, recipe_id: delete_favourite_params[:recipe_id])
+    if @favourite&.destroy
+      render json: { success: true }
+    else
+      render json: { success: false}
+    end
   end
 
   def getFavouritesByUserId
@@ -68,6 +74,12 @@ class FavouritesController < ApplicationController
         :diet_labels => [],
         :health_labels => [],
         :ingredient_lines => []
+      )
+    end
+
+    def delete_favourite_params
+      params.require(:favourite).permit(
+        :recipe_id,
       )
     end
 end
