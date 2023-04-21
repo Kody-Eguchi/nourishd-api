@@ -39,13 +39,8 @@ class FavouritesController < ApplicationController
 
   # DELETE /favourites/1
   def destroy
-    user_id = decrypt_cookie_value(:_nutrition_app_api_session)
-    @favourite = Favourite.find_by(user_id: user_id, recipe_id: delete_favourite_params[:recipe_id])
-    if @favourite&.destroy
-      render json: { success: true }
-    else
-      render json: { success: false}
-    end
+    @favourite.destroy
+    
   end
 
   def getFavouritesByUserId
