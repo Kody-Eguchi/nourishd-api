@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   post '/removeDayInfo' => 'days#removeItem'
   get '/recipeSearch' => 'recipes#getRecipeById'
   get '/userFavourites' => 'favourites#getFavouritesByUserId'
+  post '/addCustomMealNutrients' => 'days#addCustomMeal'
 end

@@ -113,6 +113,33 @@ end
     render json: { day: @day, success: true }
   end
 
+  def addCustomMeal
+    user_id = decrypt_cookie_value(:_nutrition_app_api_session)
+    @day = Day.where(user_id: user_id)
+          .where("DATE(created_at) = ?", Date.today)
+          .first
+  
+    if @day == nil
+      @day = Day.create!(user_id: user_id)
+    end
+  
+    day_custom_meal_params.each do |key, value|
+      if key == 'history'
+        @day.history << value
+      else
+        @day[key] += value.to_f
+      end
+    end
+
+    if @day.save
+      render json: { day: @day, success: true }
+    else
+      render json: @day.errors, status: :unprocessable_entity
+    end
+  
+  end 
+  
+
 
 
   private
@@ -138,6 +165,20 @@ end
         :calcium,
         :iron,
         :cholesterol,
+        history:  {}
+      )
+      
+    end
+
+    def day_custom_meal_params
+      params.require(:day).permit(
+        :user_id,
+        :calories,
+        :fat,
+        :carbohydrates,
+        :sugar,
+        :protein,
+        :fiber,
         history:  {}
       )
       
