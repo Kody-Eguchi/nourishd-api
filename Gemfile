@@ -52,3 +52,5 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'actionpack'
 gem "sidekiq", "~> 7.0"
 gem 'attr_encrypted'
+
+gem 'rails_12factor'
