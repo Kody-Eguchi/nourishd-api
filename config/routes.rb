@@ -16,4 +16,8 @@ Rails.application.routes.draw do
   get '/recipeSearch' => 'recipes#getRecipeById'
   get '/userFavourites' => 'favourites#getFavouritesByUserId'
   post '/addCustomMealNutrients' => 'days#addCustomMeal'
+
+
+  root to: redirect('/healthcheck', status: 302)
+  get "/healthcheck", to: proc { [200, {}, ["success"]] }
 end
