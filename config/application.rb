@@ -59,6 +59,6 @@ module NutritionAppApi
     config.middleware.use ActionDispatch::Session::CookieStore, key: '_nutrition_app_api_session'
 
 
-    config.assets.compile = false
+    
   end
 end
