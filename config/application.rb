@@ -31,6 +31,23 @@ module NutritionAppApi
     # in config/environments, which are processed later.
     #
     # config.time_zone = "Central Time (US & Canada)"
+
+    # this set create_at matches with local time 🕛
+    config.time_zone = 'Eastern Time (US & Canada)'
+    config.active_record.default_timezone = :local
+    config.active_record.time_zone_aware_attributes = false
+    module YourApp
+      class Application < Rails::Application
+        config.active_record.default_timezone = :local
+        config.active_record.time_zone_aware_attributes = false
+    
+        # Automatically set timestamp columns to local time zone
+        config.active_record.time_zone_aware_types = [:datetime, :time]
+    
+        # Override the default attributes that are automatically timezone converted
+        config.active_record.time_zone_aware_attributes = [:created_at, :updated_at]
+      end
+    end
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Only loads a smaller set of middleware suitable for API only apps.
