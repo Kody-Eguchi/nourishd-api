@@ -56,7 +56,7 @@ module NutritionAppApi
     config.api_only = true
 
     config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::CookieStore, key: '_nutrition_app_api_session', same_site: :None, secure: true 
+    config.middleware.use ActionDispatch::Session::CookieStore, key: '_nutrition_app_api_session', same_site: :none, secure: true 
 
     config.assets.enabled = false
     config.assets.compile = false
