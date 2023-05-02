@@ -32,4 +32,4 @@
 .env
 /config/credentials/production.key
 /config/credentials/production.yml.enc
-/config/credentials.yml.enc
+
