@@ -31,7 +31,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     resource '*',
       headers: :any,
       methods: [:get, :post, :put, :patch, :delete, :options, :head],
-      credentials: true,
+      credentials: 'include',
       expose: ['Access-Control-Allow-Origin', 'Access-Control-Allow-Credentials']
   end
 end
