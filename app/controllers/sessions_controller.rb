@@ -8,12 +8,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by_email(params[:email])
     if user == user.authenticate_with_credentials(params[:email], params[:password])
-      session[:user_id] = {
-      value: user.id,
-      same_site: :none,
-      secure: Rails.env.production?
-      }
-
+      session[:user_id] = user.id
       render json: {success: true, message: 'Login Success'}
     else
       render json: {success: false, message: 'Invalid email or password'}
