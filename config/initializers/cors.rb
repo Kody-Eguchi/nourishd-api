@@ -19,20 +19,24 @@ require 'dotenv'
 port = ENV['PORT']
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
-  allow do
-    origins "localhost:#{port}"
-    resource '*',
-      headers: :any,
-      methods: [:get, :post, :put, :patch, :delete, :options, :head],
-      credentials: true
-  end
-  allow do
-    origins "nourishd.netlify.app"
-    resource '*',
-      headers: :any,
-      methods: [:get, :post, :put, :patch, :delete, :options, :head],
-      credentials: true
-      # expose: ['Access-Control-Allow-Origin']
+  if Rails.env.production?
+    allow do
+      origins ["nourishd.netlify.app"]
+
+      resource '*',
+        headers: :any,
+        methods: [:get, :post, :put, :patch, :delete, :options, :head],
+        credentials: true
+    end
+  else
+    allow do
+      origins "localhost:#{port}"
+      resource '*',
+        headers: :any,
+        methods: [:get, :post, :put, :patch, :delete, :options, :head],
+        credentials: true
+        # expose: ['Access-Control-Allow-Origin']
+    end
   end
 end
 
